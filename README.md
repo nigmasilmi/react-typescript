@@ -92,8 +92,6 @@ export const ChildAsFC: React.FC<ChildProps> = ({ color }) => {
 
 ## TypeScript with Class Components
 
-### What about types?
+### What about types states event handlers?
 
-### What about states?
-
-### What about event handlers?
+Checkout the UserSearch class

@@ -2,6 +2,13 @@ import ReactDOM from "react-dom";
 import GuestList from "./state/GuestList";
 import UserSearch from "./state/UserSearch";
 import EventComponent from "./events/EventComponent";
+import UserSearchClass from "./classes/UserSearch";
+
+const users = [
+  { name: "Jane", age: 20 },
+  { name: "John", age: 30 },
+  { name: "Sarah", age: 27 },
+];
 
 const App = () => {
   return (
@@ -12,6 +19,10 @@ const App = () => {
       <UserSearch />
       <h2>Event</h2>
       <EventComponent />
+      <h2>
+        <i>User Search Class based Component</i>
+      </h2>
+      <UserSearchClass users={users} />
     </div>
   );
 };
