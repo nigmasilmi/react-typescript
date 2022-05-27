@@ -1,46 +1,78 @@
-# Getting Started with Create React App
+# Dev notes
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+[React+TypeScript Cheatsheets](https://github.com/typescript-cheatsheets/react)
 
-## Available Scripts
+## Changes with TypeScript
 
-In the project directory, you can run:
+- Applying types to component props
+- Appliying types to state in a component
+- Types with event handlers
+- ...other areas
 
-### `npm start`
+## Big Difference with Props
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+- There must be an interface that defines what props should a component receive, that allows:
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+  - To verify that the props we are passing are the correct ones
+  - Use the correct name and type for the props
 
-### `npm test`
+  How do we do this?
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+  - Define the interface
+  - Implement the interface in the component in one of the different ways (more on this later)
 
-### `npm run build`
+### Option 1: just annotate
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Annotate in the component function arguments => But with this approach, TS does not know that we are creating a React component, so the propTypes, or displayName or defaultProps or contextTypes will not be validated by TS.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+```js
+interface ChildProps {
+    color: string;
+}
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+export const Child = ({ color }: ChildProps) => {
+    return <div>{color}</div>;
+};
 
-### `npm run eject`
+// in the parent component
+...
+return <Child color="red" />
+...
+```
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+### Option 2: use React.FC
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+[ React.FC from React 18 removed its implicit children, so it must be typed](https://react-typescript-cheatsheet.netlify.app/docs/basic/getting-started/function_components/)
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+"Tell" React that this is a function component, that might have properties assigned to it like propTypes and context Types and that will receive props of type ChildProps, and also that it may receive props.children (behavior by default)
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+```js
+export const ChildAsFC: React.FC<ChildProps> = ({ color }) => {
+  return <div>{color}</div>;
+};
 
-## Learn More
+// since React 18
+// children must be typed
+...
+ children?: React.ReactNode | React.ReactNode[];
+...
+export const ChildAsFC: React.FunctionComponent<ChildProps> = ({ color }) => {
+  return <div>{color}</div>;
+};
+```
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+### Option 3:
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+iii
+
+```js
+export const ChildAsFC: React.FC<ChildProps> = ({ color }) => {
+  return <div>{color}</div>;
+};
+```
+
+## State with TypeScript
+
+- Provide a type for the state
+
+`const [guests, setGuests] = useState<string[]>([]);`
