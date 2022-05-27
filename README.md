@@ -76,3 +76,24 @@ export const ChildAsFC: React.FC<ChildProps> = ({ color }) => {
 - Provide a type for the state
 
 `const [guests, setGuests] = useState<string[]>([]);`
+
+- Take into account the different values that a state can be set to
+  ` const [foundUser, setFoundUser] = useState<{ name: string; age: number } | undefined >();`
+
+## Inline vs. Standalone Event Handlers
+
+- Inline as part of a callback and standalone as part of a separate function
+- Inline has inference type by default, is not the case when the callback function is defined ahead of time
+- For that the event object must be annotated (checkout the type inferred and annotate as such)
+
+### Handling drag events
+
+- same as before, but, check other event types available by exploring the interface for events by ctrl + click on the event type
+
+## TypeScript with Class Components
+
+### What about types?
+
+### What about states?
+
+### What about event handlers?
