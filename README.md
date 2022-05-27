@@ -94,4 +94,20 @@ export const ChildAsFC: React.FC<ChildProps> = ({ color }) => {
 
 ### What about types states event handlers?
 
-Checkout the UserSearch class
+Checkout the UserSearch class `commit 914c869`
+
+## useRef with TypeScript
+
+- When using refs, TypeScript warns that maybe that element is not assigned yet, so...
+- To give "peace" to TypeScript assing a type and set the default to null, then use a type guard in useEffect if necessary
+
+```js
+const inputRef = useRef<HTMLInputElement | null>(null);
+
+// type guard
+...
+if (!inputRef.current) {
+  return;
+}
+...
+```
