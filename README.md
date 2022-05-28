@@ -21,3 +21,17 @@
 4. Better yet, define types separately for each action
 5. Define a type with union statements to pack all the checking logic for action types
 6. To handle the strings for actions, define an enum
+7. Organize actions, types and reducer files/folders
+
+## Action creator setup
+
+1. Remember with redux-thunk, an action creator returns an async function
+2. That async function receives the dispatch function
+3. In the action creator async function body, dispatch actions considering all cases and choose the ones that make sense
+4. Ensure that the dispatched actions are of the correct type, for that use Dispatch from redux and annotate the dispatch function
+
+## Combine all pieces of store (or prepare for doing so)
+
+(Redux approach // check the Redux Toolkit approach)
+
+1. Create an index.ts in the reducers folder and combine them
